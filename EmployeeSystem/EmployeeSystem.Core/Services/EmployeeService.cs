@@ -46,7 +46,7 @@ public class EmployeeService : IEmployeeService
         this._dbContext.SaveChanges();
     }
 
-    public Task<IEnumerable<EmployeeInputModel>> GetAll()
+    public Task<IEnumerable<EmployeeInputModel>> GetTop5()
         => null;
 
     public async Task<EmployeeInputModel> GetEmployee(int id)
@@ -74,5 +74,20 @@ public class EmployeeService : IEmployeeService
     {
         var currentToEdit = await this._dbContext.Employees
             .FirstOrDefaultAsync(e => e.Id == model.Id);
+
+        if (currentToEdit is null)
+        {
+            throw new ArgumentNullException("Invalid employee.");
+        }
+
+        //should use Automapper
+
+        currentToEdit.FullName = model.FullName;
+        currentToEdit.PhoneNumber = model.PhoneNumber;
+        currentToEdit.Email = model.Email;
+        currentToEdit.DateOfBirth = model.DateOfBirth;
+        currentToEdit.MonthlySalary = model.MonthlySalary;
+
+        await this._dbContext.SaveChangesAsync();
     }
 }
