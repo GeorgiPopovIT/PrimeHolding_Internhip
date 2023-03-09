@@ -2,10 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using static EmployeeSystem.Core.ModelsConstants.Employee;
 
-namespace EmployeeSystem.Core.Models;
+namespace EmployeeSystem.Core.Employees.Models;
 
 public class EmployeeInputModel
 {
+    public int Id { get; init; }
+
     [Required(ErrorMessage = FULL_NAME_REQUIRED)]
     [StringLength(FULL_NAME_MAX_LENGTH, ErrorMessage = FULL_NAME_LENGTH, MinimumLength = FULL_NAME_MIN_LENGTH)]
     public string FullName { get; set; }

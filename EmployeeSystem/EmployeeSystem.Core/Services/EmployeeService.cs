@@ -1,6 +1,9 @@
 ﻿using EmployeeSystem.Core.Contracts;
-using EmployeeSystem.Core.Models;
+using EmployeeSystem.Core.Employees.Models;
 using EmployeeSystem.Infrastructure;
+using EmployeeSystem.Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace EmployeeSystem.Core.Services;
 
@@ -13,28 +16,63 @@ public class EmployeeService : IEmployeeService
         _dbContext = dbContext;
     }
 
-    public Task CreateEmployee(EmployeeInputModel model)
+    public async Task CreateEmployee(EmployeeInputModel model)
     {
-        throw new NotImplementedException();
+        var employeeToAdd = new Employee
+        {
+            FullName = model.FullName,
+            Email = model.Email,
+            PhoneNumber = model.PhoneNumber,
+            DateOfBirth = model.DateOfBirth,
+            MonthlySalary = model.MonthlySalary,
+        };
+
+        await this._dbContext.Employees.AddAsync(employeeToAdd);
+
+        await this._dbContext.SaveChangesAsync();
     }
 
-    public Task DeleteEmployee(int id)
+    public void DeleteEmployee(int id)
     {
-        throw new NotImplementedException();
+        var employeeToRemove = this._dbContext.Employees.FirstOrDefault(e => e.Id == id);
+
+        if (employeeToRemove is null)
+        {
+            throw new ArgumentNullException("Invalid employee.");
+        }
+
+        this._dbContext.Employees.Remove(employeeToRemove);
+
+        this._dbContext.SaveChanges();
     }
 
     public Task<IEnumerable<EmployeeInputModel>> GetAll()
+        => null;
+
+    public async Task<EmployeeInputModel> GetEmployee(int id)
     {
-        throw new NotImplementedException();
+        var currentEmployee = await this._dbContext.Employees
+            .FirstOrDefaultAsync(e => e.Id == id);
+
+        if (currentEmployee is null)
+        {
+            throw new ArgumentNullException("Invalid ID.");
+        }
+
+        return new EmployeeInputModel
+        {
+            Id = id,
+            Email = currentEmployee.Email,
+            FullName = currentEmployee.FullName,
+            DateOfBirth = currentEmployee.DateOfBirth,
+            PhoneNumber = currentEmployee.PhoneNumber,
+            MonthlySalary = currentEmployee.MonthlySalary
+        };
     }
 
-    public Task GetEmployee(int id)
+    public async Task UpdateEmployee(EmployeeInputModel model)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateEmployee(EmployeeInputModel model)
-    {
-        throw new NotImplementedException();
+        var currentToEdit = await this._dbContext.Employees
+            .FirstOrDefaultAsync(e => e.Id == model.Id);
     }
 }

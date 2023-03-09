@@ -1,4 +1,4 @@
-﻿using EmployeeSystem.Core.Models;
+﻿using EmployeeSystem.Core.Employees.Models;
 
 namespace EmployeeSystem.Core.Contracts;
 
@@ -6,11 +6,11 @@ public interface IEmployeeService
 {
     Task CreateEmployee(EmployeeInputModel model);
 
-    Task GetEmployee(int id);
+    Task<EmployeeInputModel> GetEmployee(int id);
 
     Task UpdateEmployee(EmployeeInputModel model);
 
-    Task DeleteEmployee(int id);
+    void DeleteEmployee(int id);
 
     Task<IEnumerable<EmployeeInputModel>> GetAll();
 }
