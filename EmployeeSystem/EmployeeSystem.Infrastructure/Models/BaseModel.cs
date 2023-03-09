@@ -2,7 +2,7 @@
 
 namespace EmployeeSystem.Infrastructure.Models;
 
-abstract class BaseModel
+public abstract class BaseModel
 {
     [Key]
     public int Id { get; init; }

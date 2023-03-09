@@ -1,22 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static EmployeeSystem.Infrastructure.Constants.ModelConstantsValidation;
+using static EmployeeSystem.Infrastructure.Constants.ModelConstants.Employee;
 
 namespace EmployeeSystem.Infrastructure.Models;
 
 public class Employee : BaseModel
 {
-    [Required(ErrorMessage = FULL_NAME_REQUIRED)]
+    [Required]
     [MaxLength(FULL_NAME_MAX_LENGTH)]
     public string FullName { get; set; }
 
-    [Required(ErrorMessage = EMAIL_REQUIRED)]
+    [Required]
     public string Email { get; set; }
 
+    [Required]
     public string PhoneNumber  { get; set; }
 
+    [Required]
     public DateTime DateOfBirth { get; set; }
 
+    [Required]
     [Precision(14, 2)]
     public decimal MonthlySalary { get; set; }
 
