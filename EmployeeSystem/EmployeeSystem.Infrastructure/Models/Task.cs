@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static EmployeeSystem.Infrastructure.Constants.ModelConstants.Task;
+using static EmployeeSystem.Infrastructure.ModelConstants.Task;
 
 namespace EmployeeSystem.Infrastructure.Models;
 

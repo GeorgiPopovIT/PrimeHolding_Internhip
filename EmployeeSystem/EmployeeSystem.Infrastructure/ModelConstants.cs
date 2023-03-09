@@ -1,4 +1,4 @@
-﻿namespace EmployeeSystem.Infrastructure.Constants;
+﻿namespace EmployeeSystem.Infrastructure;
 
 public static class ModelConstants
 {

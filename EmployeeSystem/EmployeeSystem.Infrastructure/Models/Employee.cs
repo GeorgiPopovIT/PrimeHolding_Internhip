@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static EmployeeSystem.Infrastructure.Constants.ModelConstants.Employee;
+using static EmployeeSystem.Infrastructure.ModelConstants.Employee;
 
 namespace EmployeeSystem.Infrastructure.Models;
 
