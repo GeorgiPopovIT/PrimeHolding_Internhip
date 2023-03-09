@@ -1,6 +1,4 @@
-﻿using EmployeeSystem.Core.Models;
-
-namespace EmployeeSystem.Core.Contracts;
+﻿namespace EmployeeSystem.Core.Contracts;
 
 public interface ITaskService
 {

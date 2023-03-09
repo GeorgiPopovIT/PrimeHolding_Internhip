@@ -12,5 +12,5 @@ public interface IEmployeeService
 
     void DeleteEmployee(int id);
 
-    Task<IEnumerable<EmployeeInputModel>> GetTop5();
+    Task<IEnumerable<EmployeeInputModel>> GetTop5Workers();
 }

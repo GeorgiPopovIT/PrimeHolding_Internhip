@@ -1,32 +1,35 @@
-﻿using EmployeeSystem.Web.Models;
+﻿using EmployeeSystem.Core.Contracts;
+using EmployeeSystem.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace EmployeeSystem.Web.Controllers
+namespace EmployeeSystem.Web.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly IEmployeeService _employeeService;
+
+    public HomeController(IEmployeeService employeeService)
     {
-        private readonly ILogger<HomeController> _logger;
+        _employeeService = employeeService;
+    }
+   
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    public async Task<IActionResult> Index()
+    {
+        var employees = await this._employeeService.GetTop5Workers();
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View(employees);
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

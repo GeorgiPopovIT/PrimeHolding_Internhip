@@ -46,8 +46,17 @@ public class EmployeeService : IEmployeeService
         this._dbContext.SaveChanges();
     }
 
-    public Task<IEnumerable<EmployeeInputModel>> GetTop5()
-        => null;
+    public async Task<IEnumerable<EmployeeInputModel>> GetTop5Workers()
+        => await this._dbContext.Employees
+        .OrderByDescending(x => x.Tasks.Count()).Select(e => new EmployeeInputModel
+        {
+            Id = e.Id,
+            Email = e.Email,
+            FullName = e.FullName,
+            DateOfBirth = e.DateOfBirth,
+            MonthlySalary = e.MonthlySalary,
+            PhoneNumber = e.PhoneNumber
+        }).ToListAsync();
 
     public async Task<EmployeeInputModel> GetEmployee(int id)
     {

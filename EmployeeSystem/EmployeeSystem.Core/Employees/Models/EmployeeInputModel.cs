@@ -17,12 +17,16 @@ public class EmployeeInputModel
     public string Email { get; set; }
 
     [Required(ErrorMessage = PHONE_REQUIRED)]
-    [Phone]
-    public string PhoneNumber { get; set; }
+	[RegularExpression(@"^(\+359|0)\s?8(\d{2}\s\d{3}\d{3}|[789]\d{7})$", ErrorMessage = PHONE_INVALID)]
+	public string PhoneNumber { get; set; }
 
     [Required(ErrorMessage = DATE_OF_BIRTH_REQUIRED)]
-    public DateTime DateOfBirth { get; set; }
+	[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}")]
+    public DateTime DateOfBirth { get; set; } 
 
     [Required(ErrorMessage = MONTHLY_SALARY_REQUIRED)]
-    public decimal MonthlySalary { get; set; }
+	[DataType(DataType.Currency)]
+
+	public decimal MonthlySalary { get; set; }
+	
 }

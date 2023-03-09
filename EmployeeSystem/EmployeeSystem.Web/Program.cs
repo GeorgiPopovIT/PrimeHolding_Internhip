@@ -1,4 +1,6 @@
-using EmployeeSystem.Web.Data;
+using EmployeeSystem.Core.Contracts;
+using EmployeeSystem.Core.Services;
+using EmployeeSystem.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,13 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<EmployeeSystemDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<EmployeeSystemDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+//builder.Services.AddTransient<ITaskService, TaskService>();
 
 var app = builder.Build();
 

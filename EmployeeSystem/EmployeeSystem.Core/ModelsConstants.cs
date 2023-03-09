@@ -16,6 +16,8 @@ public static class ModelsConstants
 
         public const string EMAIL_INVALID = "Email addres is invalid.";
 
+        public const string PHONE_INVALID = "Not a valid phone number";
+
     }
 
     public static class Task
