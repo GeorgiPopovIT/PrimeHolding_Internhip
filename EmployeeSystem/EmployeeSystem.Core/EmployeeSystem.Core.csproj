@@ -10,8 +10,4 @@
     <ProjectReference Include="..\EmployeeSystem.Infrastructure\EmployeeSystem.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Tasks\Models\" />
-  </ItemGroup>
-
 </Project>

@@ -21,12 +21,12 @@ public class EmployeeInputModel
 	public string PhoneNumber { get; set; }
 
     [Required(ErrorMessage = DATE_OF_BIRTH_REQUIRED)]
+	[DataType(DataType.Date,ErrorMessage ="Invalid date.")]
 	[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}")]
     public DateTime DateOfBirth { get; set; } 
 
     [Required(ErrorMessage = MONTHLY_SALARY_REQUIRED)]
-	[DataType(DataType.Currency)]
 
-	public decimal MonthlySalary { get; set; }
+	public double MonthlySalary { get; set; }
 	
 }

@@ -32,11 +32,35 @@
 					<th>
 						Monthly salary
 					</th>
+					<th>Settings</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-				</tr>
+				@foreach (var employee in Model)
+				{
+					<tr>
+						<td>@employee.FullName</td>
+						<td>@employee.Email</td>
+						<td>@employee.PhoneNumber</td>
+						<td>@employee.MonthlySalary BGN</td>
+						<td>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Options
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item btn btn-secondary" href="#">Add task</a></li>
+									<li><a class="dropdown-item btn btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a></li>
+									<li>
+										<form method="post">
+											<button type="submit" class="dropdown-item btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id">Delete</button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				}
 			</tbody>
 		</table>
 	}

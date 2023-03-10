@@ -3,6 +3,7 @@ using EmployeeSystem.Core.Employees.Models;
 using EmployeeSystem.Infrastructure;
 using EmployeeSystem.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using Task = System.Threading.Tasks.Task;
 
 namespace EmployeeSystem.Core.Services;
@@ -24,7 +25,7 @@ public class EmployeeService : IEmployeeService
             Email = model.Email,
             PhoneNumber = model.PhoneNumber,
             DateOfBirth = model.DateOfBirth,
-            MonthlySalary = model.MonthlySalary,
+            MonthlySalary = (decimal)model.MonthlySalary,
         };
 
         await this._dbContext.Employees.AddAsync(employeeToAdd);
@@ -54,7 +55,7 @@ public class EmployeeService : IEmployeeService
             Email = e.Email,
             FullName = e.FullName,
             DateOfBirth = e.DateOfBirth,
-            MonthlySalary = e.MonthlySalary,
+            MonthlySalary = (double)e.MonthlySalary,
             PhoneNumber = e.PhoneNumber
         }).ToListAsync();
 
@@ -75,7 +76,7 @@ public class EmployeeService : IEmployeeService
             FullName = currentEmployee.FullName,
             DateOfBirth = currentEmployee.DateOfBirth,
             PhoneNumber = currentEmployee.PhoneNumber,
-            MonthlySalary = currentEmployee.MonthlySalary
+            MonthlySalary = (double)currentEmployee.MonthlySalary
         };
     }
 
@@ -95,7 +96,7 @@ public class EmployeeService : IEmployeeService
         currentToEdit.PhoneNumber = model.PhoneNumber;
         currentToEdit.Email = model.Email;
         currentToEdit.DateOfBirth = model.DateOfBirth;
-        currentToEdit.MonthlySalary = model.MonthlySalary;
+        currentToEdit.MonthlySalary = (decimal)model.MonthlySalary;
 
         await this._dbContext.SaveChangesAsync();
     }

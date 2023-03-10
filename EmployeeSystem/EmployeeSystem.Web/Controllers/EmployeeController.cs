@@ -20,8 +20,45 @@ public class EmployeeController : Controller
 	}
 
 	[HttpPost]
-	public IActionResult Create(EmployeeInputModel model)
+	public async Task<IActionResult> Create(EmployeeInputModel model)
 	{
-		return View(new EmployeeInputModel());
+		if (!ModelState.IsValid)
+		{
+			return View(new EmployeeInputModel());
+		}
+
+		await this._employeeService.CreateEmployee(model);
+
+		return RedirectToAction(nameof(Index), "Home");
+	}
+
+	[HttpGet]
+	public async Task<IActionResult> Edit(int id)
+	{
+		var currentEmployee = await this._employeeService.GetEmployee(id);
+
+		return View(currentEmployee);
+	}
+
+	[HttpPut]
+	public async Task<IActionResult> Edit(EmployeeInputModel model)
+	{
+		if (!ModelState.IsValid)
+		{
+			return View(model);
+		}
+
+		await this._employeeService.UpdateEmployee(model);
+
+		return RedirectToAction(nameof(Index), "Home");
+	}
+
+
+	[HttpPost]
+	public IActionResult Delete(int id)
+	{
+		this._employeeService.DeleteEmployee(id);
+
+		return RedirectToAction(nameof(Index), "Home");
 	}
 }
