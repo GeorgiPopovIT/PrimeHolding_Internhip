@@ -4,7 +4,7 @@ public interface ITaskService
 {
     Task CreateTask();
 
-    //Task GetEmployee(int id);
+    Task GetTask(int id);
 
     Task UpdateTask();
 
