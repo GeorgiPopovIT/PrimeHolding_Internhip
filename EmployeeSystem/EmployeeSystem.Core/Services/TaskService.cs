@@ -1,6 +1,7 @@
 ﻿using EmployeeSystem.Core.Contracts;
 using EmployeeSystem.Core.Tasks.Models;
 using EmployeeSystem.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Task = EmployeeSystem.Infrastructure.Models.Task;
 
 namespace EmployeeSystem.Core.Services;
@@ -14,12 +15,12 @@ public class TaskService : ITaskService
 		this._dbContext = _dbContext;
 	}
 
-	public async System.Threading.Tasks.Task CreateTask(int employeeId,TaskInputModel model)
+	public async System.Threading.Tasks.Task CreateTask(TaskInputModel model)
 	{
 		var taskToCreate = new Task
 		{
 			Description = model.Description,
-			AssigneeId = employeeId,
+			AssigneeId = model.AssigneeId,
 			DueDate = model.DueDate,
 			Title = model.Title,
 		};
@@ -30,7 +31,7 @@ public class TaskService : ITaskService
 
 	}
 
-	public void DeleteEmployee(int id)
+	public void DeleteTask(int id)
 	{
 		var taskToRemove = this._dbContext.Tasks.FirstOrDefault(t => t.Id == id);
 
@@ -62,8 +63,39 @@ public class TaskService : ITaskService
 		};
 	}
 
-	public System.Threading.Tasks.Task UpdateTask(TaskInputModel model)
+	public async System.Threading.Tasks.Task UpdateTask(TaskInputModel model)
 	{
-		throw new NotImplementedException();
+		var currentToEdit = await this._dbContext.Tasks
+		   .FirstOrDefaultAsync(t => t.Id == model.Id);
+
+		if (currentToEdit is null)
+		{
+			throw new ArgumentNullException("Invalid task.");
+		}
+
+		//should use Automapper
+
+		currentToEdit.Title = model.Title;
+		currentToEdit.Description = model.Description;
+		currentToEdit.DueDate = model.DueDate;
+
+		await this._dbContext.SaveChangesAsync();
+	}
+
+	public TaskForEmployeeViewModel GetAllForEmployee(int employeeId)
+	{
+		var tasksForEmployee = this._dbContext.Tasks
+			.Where(t => t.AssigneeId == employeeId).Select(t => new TaskForEmployeeViewModel
+		{
+			EmployeeName = t.Assignee.FullName,
+			Tasks = this._dbContext.Tasks.Select(t => new TaskInputModel
+			{
+				Description= t.Description,
+				Title= t.Title,
+				DueDate= t.DueDate,
+			})
+		}).FirstOrDefault();
+
+		return tasksForEmployee;
 	}
 }

@@ -40,7 +40,7 @@ public class EmployeeController : Controller
 		return View(currentEmployee);
 	}
 
-	[HttpPut]
+	[HttpPost]
 	public async Task<IActionResult> Edit(EmployeeInputModel model)
 	{
 		if (!ModelState.IsValid)

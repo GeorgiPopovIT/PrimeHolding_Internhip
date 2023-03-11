@@ -3,6 +3,7 @@
 <div class="row col-md-4 offset-4">
 	<form method="post">
 		<div class="mb-3">
+			<input type="hidden" asp-for="Id" />
 			<label class="form-label">Full name</label>
 			<input asp-for="FullName" class="form-control" placeholder="Enter full name">
 			<span class="small text-danger" asp-validation-for="FullName"></span>

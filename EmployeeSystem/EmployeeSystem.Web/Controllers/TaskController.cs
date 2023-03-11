@@ -14,20 +14,21 @@ public class TaskController : Controller
 	}
 
 	[HttpGet]
-	public IActionResult Create()
+	public IActionResult Create(int employeeId)
 	{
-		return View();
+
+		return View(new TaskInputModel { AssigneeId = employeeId});
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Create(int employeeId, TaskInputModel model)
+	public async Task<IActionResult> Create(TaskInputModel model)
 	{
 		if (!ModelState.IsValid)
 		{
 			return View(model);
 		}
 
-		await this._taskService.CreateTask(employeeId, model);
+		await this._taskService.CreateTask(model);
 
 		return RedirectToAction(nameof(Index), "Home");
 	}
@@ -40,7 +41,7 @@ public class TaskController : Controller
 		return View(currentTask);
 	}
 
-	[HttpPost]
+	[HttpPut]
 	public async Task<IActionResult> Edit(TaskInputModel model)
 	{
 		if (!ModelState.IsValid)
@@ -50,7 +51,15 @@ public class TaskController : Controller
 
 		await this._taskService.UpdateTask(model);
 
-		return RedirectToAction(nameof(Index), "Home");
+		return RedirectToAction(nameof(AllForEmployee), "Task");
+	}
+
+	[HttpGet]
+	public IActionResult AllForEmployee(int employeeId)
+	{
+		var tasks = this._taskService.GetAllForEmployee(employeeId);
+
+		return View(tasks);
 	}
 
 	[HttpPost]
@@ -58,6 +67,6 @@ public class TaskController : Controller
 	{
 		this._taskService.DeleteTask(id);
 
-		return RedirectToAction(nameof(Index), "Home");
+		return RedirectToAction(nameof(AllForEmployee), "Task");
 	}
 }
