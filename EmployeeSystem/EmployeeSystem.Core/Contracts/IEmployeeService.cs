@@ -13,4 +13,6 @@ public interface IEmployeeService
     void DeleteEmployee(int id);
 
     Task<IEnumerable<EmployeeInputModel>> GetTop5Workers();
+
+    decimal AverageMonthlySalary();
 }

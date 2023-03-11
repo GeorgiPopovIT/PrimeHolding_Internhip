@@ -1,4 +1,5 @@
 ﻿using EmployeeSystem.Core.Contracts;
+using EmployeeSystem.Core.Employees.Models;
 using EmployeeSystem.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -18,8 +19,13 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var employees = await this._employeeService.GetTop5Workers();
+        var avgSalary = this._employeeService.AverageMonthlySalary();
 
-        return View(employees);
+        return View(new ListingEmployeesModel
+        {
+            Employees = employees,
+            AverageSalary = avgSalary
+		});
     }
 
     public IActionResult Privacy()

@@ -101,5 +101,7 @@ public class EmployeeService : IEmployeeService
 
         await this._dbContext.SaveChangesAsync();
     }
-   
+
+    public decimal AverageMonthlySalary()
+        => this._dbContext.Employees.Average(e => e.MonthlySalary);
 }

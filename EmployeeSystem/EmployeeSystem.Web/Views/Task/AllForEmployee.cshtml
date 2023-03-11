@@ -10,8 +10,10 @@
 		<div class="card-body">
 			<h5 class="card-title">@task.Title</h5>
 			<h6 class="card-subtitle mb-2 text-muted">@task.DueDate.ToString("d")</h6>
-			<p class="card-text">@task.Description</p>
-			<a asp-controller="Task" asp-action="Edit" asp-route-id="@task.Id" class="card-link btn btn-warning ">Edit task</a>
+			<p class="card-text mb-3">@task.Description</p>
+
+			<a asp-controller="Task" asp-action="Edit" asp-route-id="@task.Id" class="card-link btn btn-warning mb-3">Edit task</a>
+
 			<form method="post">
 				<button type="submit" asp-controller="Task" asp-action="Delete" asp-route-id="@task.Id" asp-route-assigneeId="@task.Id" class="card-link btn btn-danger ">Delete</button>
 			</form>

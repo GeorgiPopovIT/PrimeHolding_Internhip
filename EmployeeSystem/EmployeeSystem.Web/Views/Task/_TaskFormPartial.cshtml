@@ -15,7 +15,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Due date</label>
-			<input asp-for="DueDate" value="22/02/2023" class="form-control">
+			<input asp-for="DueDate" value="@Model.DueDate.ToString("yyyy-MM-dd")" class="form-control">
 			<span class="small text-danger" asp-validation-for="DueDate"></span>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>

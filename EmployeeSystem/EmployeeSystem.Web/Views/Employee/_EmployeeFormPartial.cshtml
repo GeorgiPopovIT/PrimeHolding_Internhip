@@ -20,7 +20,7 @@
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Date of birth</label>
-			<input asp-for="DateOfBirth" class="form-control" placeholder="Enter date of birth">
+			<input asp-for="DateOfBirth" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" placeholder="Enter date of birth">
 			<span class="small text-danger" asp-validation-for="DateOfBirth"></span>
 		</div>
 		<div class="mb-3">
