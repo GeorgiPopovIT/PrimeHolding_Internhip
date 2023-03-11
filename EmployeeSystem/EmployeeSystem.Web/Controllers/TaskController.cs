@@ -41,7 +41,7 @@ public class TaskController : Controller
 		return View(currentTask);
 	}
 
-	[HttpPut]
+	[HttpPost]
 	public async Task<IActionResult> Edit(TaskInputModel model)
 	{
 		if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ public class TaskController : Controller
 
 		await this._taskService.UpdateTask(model);
 
-		return RedirectToAction(nameof(AllForEmployee), "Task");
+		return RedirectToAction(nameof(AllForEmployee), "Task", new {employeeId = model.AssigneeId});
 	}
 
 	[HttpGet]
@@ -63,10 +63,10 @@ public class TaskController : Controller
 	}
 
 	[HttpPost]
-	public IActionResult Delete(int id)
+	public IActionResult Delete(int assigneeId, int id)
 	{
 		this._taskService.DeleteTask(id);
 
-		return RedirectToAction(nameof(AllForEmployee), "Task");
+		return RedirectToAction(nameof(AllForEmployee), "Task", new {employeeId = assigneeId });
 	}
 }

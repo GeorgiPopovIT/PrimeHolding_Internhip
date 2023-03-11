@@ -48,8 +48,8 @@
 						<td>@employee.PhoneNumber</td>
 						<td>@employee.MonthlySalary BGN</td>
 						<td>
-							Number of tasks: @employee.TasksCount
-							<a class="btn btn-warning">View all</a>
+							Tasks: @employee.TasksCount
+							<a asp-controller="Task" asp-action="AllForEmployee" asp-route-employeeId="@employee.Id" class="btn btn-warning">View all</a>
 						</td>
 						<td>
 							<div class="dropdown">

@@ -58,7 +58,7 @@ public class TaskService : ITaskService
 		{
 			Description = currentTask.Description,
 			Title = currentTask.Title,
-			DueDate = currentTask.DueDate,
+			DueDate = Convert.ToDateTime(currentTask.DueDate.ToShortTimeString()),
 			AssigneeId = currentTask.AssigneeId
 		};
 	}
@@ -86,15 +86,16 @@ public class TaskService : ITaskService
 	{
 		var tasksForEmployee = this._dbContext.Tasks
 			.Where(t => t.AssigneeId == employeeId).Select(t => new TaskForEmployeeViewModel
-		{
-			EmployeeName = t.Assignee.FullName,
-			Tasks = this._dbContext.Tasks.Select(t => new TaskInputModel
 			{
-				Description= t.Description,
-				Title= t.Title,
-				DueDate= t.DueDate,
-			})
-		}).FirstOrDefault();
+				EmployeeName = t.Assignee.FullName,
+				Tasks = this._dbContext.Tasks.Select(t => new TaskInputModel
+				{
+					Id = t.Id,
+					Description = t.Description,
+					Title = t.Title,
+					DueDate = t.DueDate,
+				}).ToList()
+			}).FirstOrDefault();
 
 		return tasksForEmployee;
 	}
