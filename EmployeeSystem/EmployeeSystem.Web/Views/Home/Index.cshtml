@@ -4,11 +4,10 @@
 }
 
 <div class="text-center">
-	<h1 class="display-4">Welcome to Employee System!</h1>
+	<h1 class="display-4 mb-4">Welcome to Employee System!</h1>
 
-	<div class="d-grid gap-2">
+	<div class="d-grid gap-2 mb-4">
 		<a class="btn btn-primary" asp-controller="Employee" asp-action="Create">Create Employee</a>
-		<a class="btn btn-secondary">Create task</a>
 	</div>
 
 	@if (!Model.Any())
@@ -32,7 +31,12 @@
 					<th>
 						Monthly salary
 					</th>
-					<th>Settings</th>
+					<th>
+						Tasks info.
+					</th>
+					<th>
+						Settings
+					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,12 +48,15 @@
 						<td>@employee.PhoneNumber</td>
 						<td>@employee.MonthlySalary BGN</td>
 						<td>
+							Number of tasks: @employee.TasksCount
+						</td>
+						<td>
 							<div class="dropdown">
 								<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 									Options
 								</button>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item btn btn-secondary" href="#">Add task</a></li>
+									<li><a class="dropdown-item btn btn-secondary" asp-controller="Task" asp-action="Create" asp-route-employeeId="@employee.Id">Add task</a></li>
 									<li><a class="dropdown-item btn btn-warning" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">Edit</a></li>
 									<li>
 										<form method="post">

@@ -10,23 +10,25 @@ public class EmployeeInputModel
 
     [Required(ErrorMessage = FULL_NAME_REQUIRED)]
     [StringLength(FULL_NAME_MAX_LENGTH, ErrorMessage = FULL_NAME_LENGTH, MinimumLength = FULL_NAME_MIN_LENGTH)]
-    public string FullName { get; set; }
+    public string FullName { get; init; }
 
     [Required(ErrorMessage = EMAIL_REQUIRED)]
     [EmailAddress(ErrorMessage = EMAIL_INVALID)]
-    public string Email { get; set; }
+    public string Email { get; init; }
 
     [Required(ErrorMessage = PHONE_REQUIRED)]
 	[RegularExpression(@"^(\+359|0)\s?8(\d{2}\s\d{3}\d{3}|[789]\d{7})$", ErrorMessage = PHONE_INVALID)]
-	public string PhoneNumber { get; set; }
+	public string PhoneNumber { get; init; }
 
     [Required(ErrorMessage = DATE_OF_BIRTH_REQUIRED)]
 	[DataType(DataType.Date,ErrorMessage ="Invalid date.")]
 	[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yy}")]
-    public DateTime DateOfBirth { get; set; } 
+    public DateTime DateOfBirth { get; init; } 
 
     [Required(ErrorMessage = MONTHLY_SALARY_REQUIRED)]
 
-	public double MonthlySalary { get; set; }
-	
+	public double MonthlySalary { get; init; }
+
+    public int TasksCount { get; init; }
+
 }

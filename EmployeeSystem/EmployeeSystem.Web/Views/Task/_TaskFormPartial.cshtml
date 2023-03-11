@@ -1,0 +1,22 @@
+﻿@model TaskInputModel
+
+<div class="row col-md-4 offset-4">
+	<form method="post">
+		<div class="mb-3">
+			<label class="form-label">Title</label>
+			<input asp-for="Title" class="form-control" placeholder="Enter title">
+			<span class="small text-danger" asp-validation-for="Title"></span>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Description</label>
+			<textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter description..."></textarea>
+			<span class="small text-danger" asp-validation-for="Description"></span>
+		</div>
+		<div class="mb-3">
+			<label class="form-label">Due date</label>
+			<input asp-for="DueDate" class="form-control" placeholder="Enter due date">
+			<span class="small text-danger" asp-validation-for="DueDate"></span>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>

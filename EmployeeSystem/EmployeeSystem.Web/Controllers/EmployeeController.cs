@@ -54,7 +54,7 @@ public class EmployeeController : Controller
 	}
 
 
-	[HttpDelete]
+	[HttpPost]
 	public IActionResult Delete(int id)
 	{
 		this._employeeService.DeleteEmployee(id);

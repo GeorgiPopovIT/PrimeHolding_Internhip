@@ -27,7 +27,7 @@ public static class ModelsConstants
 		public const string DUEDATE_REQUIRED = "Due date is required.";
 
         public const int TITLE_DESCRIPTION_MIN_LENGTH = 3;
-		public const string TITLE_DESCRIPTION_MIN_LENGTH_ERRORR = "MUST be at least 3 characters.";
+		public const string TITLE_DESCRIPTION_MIN_LENGTH_ERRORR = "must be at least 3 characters.";
 
 
 	}

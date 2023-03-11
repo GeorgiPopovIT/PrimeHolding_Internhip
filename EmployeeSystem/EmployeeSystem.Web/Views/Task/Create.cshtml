@@ -1,0 +1,13 @@
+﻿@model TaskInputModel
+@{
+	ViewData["Title"] = "Add task";
+}
+
+<h2 class="text-center">Add task to employee</h2>
+
+<partial name="_TaskFormPartial" model="Model" />
+
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

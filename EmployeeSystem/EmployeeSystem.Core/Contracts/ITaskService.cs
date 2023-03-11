@@ -1,12 +1,14 @@
-﻿namespace EmployeeSystem.Core.Contracts;
+﻿using EmployeeSystem.Core.Tasks.Models;
+
+namespace EmployeeSystem.Core.Contracts;
 
 public interface ITaskService
 {
-    Task CreateTask();
+    Task CreateTask(int employeeId,TaskInputModel model);
 
-    Task GetTask(int id);
+	TaskInputModel GetTask(int id);
 
-    Task UpdateTask();
+    Task UpdateTask(TaskInputModel model);
 
     void DeleteTask(int id);
 

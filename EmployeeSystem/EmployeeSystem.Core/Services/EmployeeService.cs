@@ -55,8 +55,9 @@ public class EmployeeService : IEmployeeService
             FullName = e.FullName,
             DateOfBirth = e.DateOfBirth,
             MonthlySalary = (double)e.MonthlySalary,
-            PhoneNumber = e.PhoneNumber
-        }).ToListAsync();
+            PhoneNumber = e.PhoneNumber,
+            TasksCount = e.Tasks.Count()
+		}).ToListAsync();
 
     public async Task<EmployeeInputModel> GetEmployee(int id)
     {
@@ -75,7 +76,8 @@ public class EmployeeService : IEmployeeService
             FullName = currentEmployee.FullName,
             DateOfBirth = currentEmployee.DateOfBirth,
             PhoneNumber = currentEmployee.PhoneNumber,
-            MonthlySalary = (double)currentEmployee.MonthlySalary
+            MonthlySalary = (double)currentEmployee.MonthlySalary,
+            TasksCount = currentEmployee.Tasks.Count()
         };
     }
 
@@ -99,4 +101,5 @@ public class EmployeeService : IEmployeeService
 
         await this._dbContext.SaveChangesAsync();
     }
+   
 }
