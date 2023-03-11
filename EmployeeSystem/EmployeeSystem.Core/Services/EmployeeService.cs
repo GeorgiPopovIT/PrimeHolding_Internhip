@@ -57,7 +57,7 @@ public class EmployeeService : IEmployeeService
             MonthlySalary = (double)e.MonthlySalary,
             PhoneNumber = e.PhoneNumber,
             TasksCount = e.Tasks.Count()
-		}).ToListAsync();
+		}).Take(5).ToListAsync();
 
     public async Task<EmployeeInputModel> GetEmployee(int id)
     {

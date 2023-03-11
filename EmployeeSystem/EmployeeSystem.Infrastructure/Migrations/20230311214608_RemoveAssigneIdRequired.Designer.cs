@@ -4,6 +4,7 @@ using EmployeeSystem.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeSystemDbContext))]
-    partial class EmployeeSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230311214608_RemoveAssigneIdRequired")]
+    partial class RemoveAssigneIdRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,7 +93,7 @@ namespace EmployeeSystem.Infrastructure.Migrations
                     b.HasOne("EmployeeSystem.Infrastructure.Models.Employee", "Assignee")
                         .WithMany("Tasks")
                         .HasForeignKey("AssigneeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Assignee");

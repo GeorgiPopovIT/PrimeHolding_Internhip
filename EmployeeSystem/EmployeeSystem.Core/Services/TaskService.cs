@@ -88,7 +88,7 @@ public class TaskService : ITaskService
 			.Where(t => t.AssigneeId == employeeId).Select(t => new TaskForEmployeeViewModel
 			{
 				EmployeeName = t.Assignee.FullName,
-				Tasks = this._dbContext.Tasks.Select(t => new TaskInputModel
+				Tasks = this._dbContext.Tasks.Where(t => t.AssigneeId == employeeId).Select(t => new TaskInputModel
 				{
 					Id = t.Id,
 					Description = t.Description,

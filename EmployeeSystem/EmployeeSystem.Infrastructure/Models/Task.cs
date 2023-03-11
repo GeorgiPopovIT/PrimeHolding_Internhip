@@ -15,7 +15,6 @@ public class Task : BaseModel
     [Required]
     public DateTime DueDate { get; set; }
 
-    [Required]
     public int AssigneeId { get; set; }
 
     public Employee Assignee { get; set; }

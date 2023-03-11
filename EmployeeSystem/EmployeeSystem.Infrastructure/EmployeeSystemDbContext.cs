@@ -29,12 +29,12 @@ public class EmployeeSystemDbContext : DbContext
         modelBuilder.Entity<Employee>()
             .HasMany(t => t.Tasks)
             .WithOne(e => e.Assignee)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Task>()
            .HasOne(e => e.Assignee)
            .WithMany(t => t.Tasks)
-           .OnDelete(DeleteBehavior.Restrict);
+           .OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(modelBuilder);
     }

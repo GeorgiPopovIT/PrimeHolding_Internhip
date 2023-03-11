@@ -16,9 +16,9 @@
 	}
 	else
 	{
-		
+
 		<h3>The 5 employees compled the largest number of tasks</h3>
-		
+
 		<h6 class="float-end">Average salary:@Model.AverageSalary.ToString("0.00") BGN</h6>
 		<table class="table table-striped table-hover">
 			<thead>
@@ -53,7 +53,10 @@
 						<td>@employee.MonthlySalary BGN</td>
 						<td>
 							Tasks: @employee.TasksCount
-							<a asp-controller="Task" asp-action="AllForEmployee" asp-route-employeeId="@employee.Id" class="btn btn-warning">View all</a>
+							@if (@employee.TasksCount > 0)
+							{
+								<a asp-controller="Task" asp-action="AllForEmployee" asp-route-employeeId="@employee.Id" class="btn btn-warning">View all</a>
+							}
 						</td>
 						<td>
 							<div class="dropdown">
