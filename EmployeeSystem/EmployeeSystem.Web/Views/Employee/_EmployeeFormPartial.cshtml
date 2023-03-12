@@ -1,4 +1,7 @@
 ﻿@model EmployeeInputModel
+@{
+	 
+}
 
 <div class="row col-md-4 offset-4">
 	<form method="post">
@@ -19,8 +22,8 @@
 			<span class="small text-danger" asp-validation-for="PhoneNumber"></span>
 		</div>
 		<div class="mb-3">
-			<label class="form-label">Date of birth</label>
-			<input asp-for="DateOfBirth" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" placeholder="Enter date of birth">
+			<label asp-for="DateOfBirth" class="form-label">Date of birth</label>
+			<input asp-for="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" class="form-control">
 			<span class="small text-danger" asp-validation-for="DateOfBirth"></span>
 		</div>
 		<div class="mb-3">

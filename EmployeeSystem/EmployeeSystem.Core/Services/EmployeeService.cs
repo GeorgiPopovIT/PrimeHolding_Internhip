@@ -103,5 +103,6 @@ public class EmployeeService : IEmployeeService
     }
 
     public decimal AverageMonthlySalary()
-        => this._dbContext.Employees.Average(e => e.MonthlySalary);
+        => this._dbContext.Employees.Count() > 0 ? this._dbContext.Employees.Average(e => e.MonthlySalary) : 0;
+
 }
